@@ -19,24 +19,26 @@ public class WikiController {
         return service.findAllWiki();
     }
 
-    @PostMapping("save_wiki")
+    @PostMapping("saveWiki")
     public String saveStudent(@RequestBody Wiki wiki) {
         service.saveWiki(wiki);
         return "Wiki successfully saved";
     }
 
-    @GetMapping("/{request}")
-    public Wiki findByRequest(@PathVariable String request) {
+    @GetMapping("findByRequest")
+    public Wiki findByRequest(@RequestParam String request) {
+
         return service.findByRequest(request);
     }
 
-    @PutMapping("update_wiki")
+    @PutMapping("updateWiki")
     public Wiki updateWiki(@RequestBody Wiki wiki) {
         return service.updateWiki(wiki);
     }
 
-    @DeleteMapping("delete_Wiki/{request}")
-    public void deleteWiki(@PathVariable String request) {
+    @DeleteMapping("deleteWiki")
+    public void deleteWiki(@RequestParam String request) {
+
         service.deleteWiki(request);
     }
 }

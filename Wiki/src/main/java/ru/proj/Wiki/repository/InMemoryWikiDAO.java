@@ -6,7 +6,6 @@ import ru.proj.Wiki.model.Wiki;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Repository
 public class InMemoryWikiDAO {
@@ -22,19 +21,25 @@ public class InMemoryWikiDAO {
         }
 
         public Wiki findByRequest(String request) {
-            return WIKI.stream()
-                    .filter(element -> element.getRequestWiki().equals(request))
-                    .findFirst()
-                    .orElse(null);
+            for (Wiki element : WIKI) {
+                if (element.getRequestWiki().equals(request)) {
+                    return element;
+                }
+            }
+            return null;
+
         }
 
-        public Wiki updateStudent(Wiki Wiki) {
-            var WikiIndex = IntStream.range(0, WIKI.size())
-                    .filter(index -> WIKI.get(index).getRequestWiki().equals(Wiki.getRequestWiki()))
-                    .findFirst()
-                    .orElse(-1);
-            if (WikiIndex > -1) {
-                WIKI.set(WikiIndex, Wiki);
+        public Wiki updateWiki(Wiki Wiki) {
+            int wikiIndex = -1;
+            for (int i = 0; i < WIKI.size(); i++) {
+                if (WIKI.get(i).getRequestWiki().equals(Wiki.getRequestWiki())) {
+                    wikiIndex = i;
+                    break;
+                }
+            }
+            if (wikiIndex > -1) {
+                WIKI.set(wikiIndex, Wiki);
                 return Wiki;
             }
             return null;

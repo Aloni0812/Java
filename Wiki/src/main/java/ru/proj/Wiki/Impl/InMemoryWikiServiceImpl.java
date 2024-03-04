@@ -19,9 +19,7 @@ private final InMemoryWikiDAO repository;
     }
 
     @Override
-    public Wiki saveWiki(Wiki Wiki) {
-        return repository.saveWiki(Wiki);
-    }
+    public Wiki saveWiki(Wiki Wiki) { return repository.saveWiki(Wiki); }
     @Override
     public Wiki findByRequest(String request) {
         return repository.findByRequest(request);
